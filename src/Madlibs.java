@@ -32,7 +32,6 @@ public class Madlibs {
     }
 
     // =====askQuestion method=====
-
     /**
      * Postcondition: questions user, recieves input from user, calls user method
      * 
@@ -45,8 +44,8 @@ public class Madlibs {
         addAnswer(userAnswer);
     }
 
+    // =====addAnswer Method=====
     /**
-     * =====addAnswer Method=====
      * Postcondition: adds inputted answer from askQuestion to ArrayList answers
      * 
      * @param {inputtedAnswer} answer from user in askQuestion method
@@ -56,8 +55,8 @@ public class Madlibs {
         answers.add(userAnswer);
     }
 
+    // =====printAnswers Method=====
     /**
-     * =====printAnswers Method=====
      * Postcondition: Prints all inputted answers from user
      */
 
@@ -73,9 +72,11 @@ public class Madlibs {
         System.out.println(story);
     }
 
+    // =====sleepThread Method=====
     /**
-     * =====sleepThread Method=====
      * Postcondition: Pauses threads from processing code for 4 seconds
+     * 
+     * @param {time} duration of thread sleep
      */
 
     public void sleepThread(int time) {
