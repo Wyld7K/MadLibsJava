@@ -35,12 +35,15 @@ public class Madlibs {
     /**
      * Postcondition: questions user, recieves input from user, calls user method
      * 
-     * @param {question} //Question asked to user
+     * @param {question}
+     *            //Question asked to user
      */
 
     public void askQuestion(String question) {
         System.out.print(question);
+
         userAnswer = scanner.nextLine();
+
         addAnswer(userAnswer);
     }
 
@@ -48,7 +51,8 @@ public class Madlibs {
     /**
      * Postcondition: adds inputted answer from askQuestion to ArrayList answers
      * 
-     * @param {inputtedAnswer} answer from user in askQuestion method
+     * @param {inputtedAnswer}
+     *            answer from user in askQuestion method
      */
 
     private void addAnswer(String inputtedAnswer) {
@@ -76,7 +80,8 @@ public class Madlibs {
     /**
      * Postcondition: Pauses threads from processing code for 4 seconds
      * 
-     * @param {time} duration of thread sleep
+     * @param {time}
+     *            duration of thread sleep
      */
 
     public void sleepThread(int time) {
@@ -92,13 +97,14 @@ public class Madlibs {
     public static void main(String[] args) {
 
         String story1 = "FILLER is on a quest FILLER their buddies and needs your help!" +
-                "Your cautious so will bring a FILLER to help you on your quest!" +
-                "You begin your search at FILLER";
+                " Your cautious so will bring a FILLER to help you on your quest!" +
+                " You begin your search in FILLER and you find an FILLER! " +
+                " You name it FILLER";
 
         Madlibs game = new Madlibs(story1);
 
         System.out.println("Welcome to MadLibs & Prepare For Adventure!");
-        game.sleepThread(500);
+        game.sleepThread(1500);
         System.out.println("Starting Game...");
         game.sleepThread(1000);
 
@@ -108,6 +114,11 @@ public class Madlibs {
 
         game.askQuestion("Please Give Me A Noun ❇️: ");
         game.askQuestion("Please Give Me A Place 🏝: ");
+        game.askQuestion("Please Give Me A Animal: ");
+        game.askQuestion("Please Give Me A Name: ");
+        game.askQuestion("Please Give Me A : ");
+        game.askQuestion("Please Give Me A : ");
+        game.askQuestion("Please Give Me A : ");
 
         game.printStory();
 
