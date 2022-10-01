@@ -13,7 +13,6 @@ import java.lang.Math;
 public class Madlibs {
     // ========VARIABLES========
 
-    private String story;
     private String userAnswer;
 
     // private boolean isPlayingRiddle;
@@ -36,16 +35,9 @@ public class Madlibs {
      * @param story
      */
 
-    public Madlibs(String story) {
-        this.story = story;
-        this.numRiddleAttempts = 2;
-        this.inputtedRiddleAnswer = "";
-    }
-
     public Madlibs() {
         this.numRiddleAttempts = 2;
         this.inputtedRiddleAnswer = "";
-        this.story = "";
 
     }
 
@@ -227,6 +219,7 @@ public class Madlibs {
     // }
 
     public void printStory(String story) {
+        System.out.println();
         System.out.println(story);
     }
 
@@ -294,7 +287,7 @@ public class Madlibs {
 
         // game.setStory(storyPartOne);
         game.printStory(storyPartOne);
-        game.printAnswers();
+
         game.sleepThread(6);
         System.out.println();
 
