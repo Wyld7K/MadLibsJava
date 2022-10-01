@@ -5,7 +5,6 @@
  * GameEngine for MadLibs
  */
 
-import java.io.*;
 import java.util.*;
 import java.util.Scanner;
 import java.lang.Thread;
@@ -13,6 +12,7 @@ import java.lang.Math;
 
 public class Madlibs {
     // ========VARIABLES========
+
     private String story;
     private String userAnswer;
 
@@ -26,32 +26,35 @@ public class Madlibs {
 
     private ArrayList<String> answers = new ArrayList<String>();
 
-    // ========METHODS========
+    /********************
+     * Methods
+     *********************/
 
-    // ========CONSTRUCTOR========
     /**
      * Madlibs constructor method
      * 
      * @param story
      */
 
+    public Madlibs(String story) {
+        this.story = story;
+        this.numRiddleAttempts = 2;
+        this.inputtedRiddleAnswer = "";
+    }
+
     public Madlibs() {
         this.numRiddleAttempts = 2;
         this.inputtedRiddleAnswer = "";
+        this.story = "";
 
     }
 
-    public Madlibs(String story) {
-        this.story = story;
-        this.numRiddleAttempts = 0;
-
-    }
-
-    // ===========RIDDLE LOGIC===========
-
-    // public void setIsPlayingRiddle() {
-    // this.isPlayingRiddle = !this.isPlayingRiddle;
-    // }
+    /**********************
+     * Game Riddle Engine
+     *********************/
+    /**
+     * Postconditions: Chooses and sets random riddle and answer
+     */
 
     public void chooseRiddle() {
         // Picks number 1-3
@@ -70,16 +73,32 @@ public class Madlibs {
 
     }
 
+    /**
+     * Postcondition: sets riddle and riddle's answer
+     * 
+     * @param riddle       Riddle question
+     * @param riddleAnswer Riddle answer
+     */
+
     public void setRiddle(String riddle, String riddleAnswer) {
         this.riddle = riddle;
         this.riddleAnswer = riddleAnswer;
 
     }
 
+    /**
+     * Postcondition: prints riddle
+     */
     public void printRiddle() {
         System.out.println("Here is the riddle: " + this.riddle);
         System.out.println("Just print the word without any articles");
     }
+
+    /**
+     * Postcondition: Message printed to the user
+     * 
+     * @param finalMessage Message whether answer is correct
+     */
 
     public void sleepMessage(String finalMessage) {
         System.out.print("Your answer is");
@@ -93,6 +112,9 @@ public class Madlibs {
         System.out.println(finalMessage);
     }
 
+    /**
+     * Game riddle logic that determines when and if the player got the answer
+     */
     public void playRiddleGame() {
 
         chooseRiddle();
@@ -122,9 +144,6 @@ public class Madlibs {
             sleepThread(1);
             System.out.println("HOW DID YOU DO IT? Here's your trophy!🏆");
 
-            // Play cool cound effect
-            // Print answers & Facts
-            // Should break out of riddleGame();
             return;
 
         } else {
@@ -133,13 +152,14 @@ public class Madlibs {
             System.out.println("I won't give you the answer though. Play Again!");
             sleepThread(2);
             return;
-            // play again()
 
         }
 
     }
 
-    // ===========MADLIBS LOGIC===========
+    /**********************
+     * Madlibs Engine
+     *********************/
     /**
      * Postcondition: Setst the story attribute to a String story
      * 
@@ -151,7 +171,7 @@ public class Madlibs {
      * Postcondition: questions user, recieves input from user, calls user method
      * 
      * @param {question}
-     *                   //Question asked to user
+     * 
      */
 
     public void askQuestion(String question) {
@@ -163,7 +183,12 @@ public class Madlibs {
     }
 
     // =====getElement Method=====
-    /** */
+    /**
+     * 
+     * @param {index} Index of element
+     * @return
+     *         String element
+     */
 
     public String getElement(int index) {
         return answers.get(index);
@@ -191,20 +216,26 @@ public class Madlibs {
         System.out.println("Your Answers Were: " + answers);
     }
 
-    public void printStory(String story) {
-        for (String answer : answers) {
-            story = story.replace("FILLER", answer);
-        }
+    /**
+     * "FILLER" is replaces for each element from answers array list
+     * 
+     * @param story
+     */
 
+    // public void setStory(String story) {
+    // this.story = story;
+    // }
+
+    public void printStory(String story) {
         System.out.println(story);
     }
 
     // =====sleepThread Method=====
     /**
-     * Postcondition: Pauses threads from processing code for 4 seconds
+     * Postcondition: Pauses threads from processing code for time seconds
      * 
      * @param {time}
-     *               duration of thread sleep
+     *               duration of thread sleep in seconds
      */
 
     public void sleepThread(int time) {
@@ -212,7 +243,7 @@ public class Madlibs {
         try {
             Thread.sleep(time * 1000);
         } catch (InterruptedException e) {
-            System.out.println("ERROR: Thread Interuption Quitting...");
+            System.out.println("ERROR : " + e.getMessage());
 
         }
     }
@@ -220,13 +251,15 @@ public class Madlibs {
     public static void main(String[] args) {
 
         Madlibs game = new Madlibs();
+
+        // Clears console
         System.out.print("\033[H\033[2J");
-        System.out.println("Welcome to MadLibs & Prepare For Adventure!");
+        System.out.println("Welcome to a normal MadLibs & Prepare For Adventure!");
         game.sleepThread(2);
         System.out.println("Starting Game...");
         game.sleepThread(2);
 
-        // =======MADLIBS QUESTIONS======= Use For loop
+        // =======MADLIBS QUESTIONS=======
 
         game.askQuestion("Please Give Me A Name 📇: ");
         game.askQuestion("Please Give Me An Infinitive formatted (to VERB)✏️: ");
@@ -234,32 +267,34 @@ public class Madlibs {
         game.askQuestion("Please Give Me A Noun ❇️: ");
         game.askQuestion("Please Give Me A Place 🏝: ");
         game.askQuestion("Please Give Me A Animal🐱: ");
-        game.askQuestion("Please Give Me A Name❡: ");
+        game.askQuestion("Please Give Me Another Name❡: ");
         game.askQuestion("Please Give Me Another Animal🐱: ");
         game.askQuestion("Please Give Me An Evil Villian Name😈 : ");
-        game.askQuestion("Please Give Me A Criminal Offense💀: ");
-        // ok
-        game.askQuestion("DID THE GAME WORK?: ");
+        game.askQuestion("(PG) Please Give Me A Criminal Offense💀: ");
 
-        // Riddle Game happens
-
-        String storyPartOne = "FILLER is on a quest FILLER their buddies and needs your help!" + "\n" +
-                "Your cautious so will bring a FILLER to help you on your quest!" + "\n" +
-                "You begin your search in FILLER and you find a FILLER! " + "\n" +
-                "You name it FILLER and it's hungry for some FILLER and" +
+        // Basic Madlibs game
+        String storyPartOne = game.getElement(0) + " is on a quest " + game.getElement(1) + " and" +
+                " their buddies needs your help! " + "\n" +
+                "Your cautious so you will bring a " + game.getElement(2) + " to help you on your quest! " + "\n" +
+                "You begin your search in " + game.getElement(3) + " and you find a " + game.getElement(4) + "\n" +
+                "You name it " + game.getElement(5) + " and it's hungry for some " +
                 game.getElement(6) + "\n" +
 
-                "After it was full. You go to help the buddies of" + game.getElement(0) +
+                "After" + game.getElement(5) + "was full. You go to help the buddies of" + game.getElement(0) +
                 "\n" +
-                "Turns out an evil character named FILLER who comitted FILLER " + "\n" +
-                "Also " + game.getElement(8) + " has kidnapped the buddies of " +
-                game.getElement(0);
+                "Turns out an evil character named " + game.getElement(7) + " who comitted " + game.getElement(8) + "\n"
+                +
+                "Also kidnapped the buddies of " + game.getElement(0);
+        game.getElement(0);
 
-        String storyPartTwo = "HAHAHAHHAHAA YOU\"VE MADE IT TO THE END " + game.getElement(8) + " Laughs!"
+        // Riddle Game
+        String storyPartTwo = "HAHAHAHHAHAA YOU\"VE MADE IT TO THE END " + game.getElement(7) + " Laughs!"
                 + "\n" +
                 "\"You will never solve my riddle!\"";
 
+        // game.setStory(storyPartOne);
         game.printStory(storyPartOne);
+        game.printAnswers();
         game.sleepThread(6);
         System.out.println();
 
@@ -267,12 +302,9 @@ public class Madlibs {
 
         game.playRiddleGame();
 
+        // Extra feature that prints all answers inputted from user
         game.printAnswers();
 
-        // Make feature that randomizes the now set answers and makes a new story
-
     }
-
-    // Object with one phrase and answer
 
 }
